@@ -8,19 +8,20 @@
    1. [tensorflow v1.6.0-rc0](https://github.com/tensorflow/tensorflow/tree/v1.6.0-rc0)**（tensorflow建议直接下载链接给的这个版本，太新的版本会有错误）**
  1. 编译
 	1.  打开vs2015 x64本机工具命令提示符，以管理员身份运行 （一定要以管理员身份运行，不然在最后一步会报错）
-	2. `cd tensorflow\contrib\cmake`
-	3. `mkdir _build`
-	4.  
-	```
-	set SWIG_EXECUTABLE=E:\workspace\103-Whistle\software\swigwin-3.0.12\swig.exe 
-set PYTHON_EXECUTABLE=d:\Anaconda3\envs\tensorflow\python.exe 
-set PYTHON_LIBRARIES=C:\Anaconda3\envs\tensorflow\libs\python36.lib
+	2. 
+		```
+		cd tensorflow\contrib\cmake
+		mkdir _build
 
- cmake -A x64 -DCMAKE_BUILD_TYPE=Release -DSWIG_EXECUTABLE=%SWIG_EXECUTABLE% -DPYTHON_EXECUTABLE=%PYTHON_EXECUTABLE% -DPYTHON_LIBRARIES=%PYTHON_LIBRARIES%  -Dtensorflow_BUILD_PYTHON_BINDINGS=OFF -Dtensorflow_ENABLE_GRPC_SUPPORT=OFF -Dtensorflow_BUILD_SHARED_LIB=ON -DCMAKE_BUILD_TYPE=Release ..
+		set SWIG_EXECUTABLE=E:\workspace\103-Whistle\software\swigwin-3.0.12\swig.exe 
+		set PYTHON_EXECUTABLE=d:\Anaconda3\envs\tensorflow\python.exe 
+		set PYTHON_LIBRARIES=C:\Anaconda3\envs\tensorflow\libs\python36.lib
 
+		cmake -A x64 -DCMAKE_BUILD_TYPE=Release -DSWIG_EXECUTABLE=%SWIG_EXECUTABLE% -DPYTHON_EXECUTABLE=%PYTHON_EXECUTABLE% -DPYTHON_LIBRARIES=%PYTHON_LIBRARIES%  -Dtensorflow_BUILD_PYTHON_BINDINGS=OFF -Dtensorflow_ENABLE_GRPC_SUPPORT=OFF -Dtensorflow_BUILD_SHARED_LIB=ON -DCMAKE_BUILD_TYPE=Release ..
 
-MSBuild /m:1 /p:CL_MPCount=1 /p:Configuration=Release /p:Platform=x64 /p:PreferredToolArchitecture=x64 ALL_BUILD.vcxproj  /filelogger
-MSbuild /m:1 /p:CL_MPCount=1 /p:Configuration=Release /p:Platform=x64 /p:PreferredToolArchitecture=x64 INSTALL.vcxproj /filelogger
+		MSBuild /m:1 /p:CL_MPCount=1 /p:Configuration=Release /p:Platform=x64 /p:PreferredToolArchitecture=x64 ALL_BUILD.vcxproj  /filelogger
+		MSbuild /m:1 /p:CL_MPCount=1 /p:Configuration=Release /p:Platform=x64 /p:PreferredToolArchitecture=x64 INSTALL.vcxproj /filelogger
+		```
 	```
 	2、linux环境下（ubuntu16）
 		1、下载安装 bazel（下载安装最新版） VPN
@@ -356,6 +357,6 @@ int inference()
 https://medium.com/jim-fleming/loading-a-tensorflow-graph-with-the-c-api-4caaff88463f
 https://medium.com/@shiweili/building-tensorflow-c-shared-library-on-windows-e79c90e23e6e
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjYzODc3NjU2LDgwODUyODkzMCwxMDM4OT
-QzMzM2XX0=
+eyJoaXN0b3J5IjpbLTE1ODgzNDE0MTksODA4NTI4OTMwLDEwMz
+g5NDMzMzZdfQ==
 -->
