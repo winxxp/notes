@@ -22,18 +22,16 @@
 		MSBuild /m:1 /p:CL_MPCount=1 /p:Configuration=Release /p:Platform=x64 /p:PreferredToolArchitecture=x64 ALL_BUILD.vcxproj  /filelogger
 		MSbuild /m:1 /p:CL_MPCount=1 /p:Configuration=Release /p:Platform=x64 /p:PreferredToolArchitecture=x64 INSTALL.vcxproj /filelogger
 		```
-	```
-	2、linux环境下（ubuntu16）
-		1、下载安装 bazel（下载安装最新版） VPN
-		2、下载tensorflow（没有版本要求）
-		3、cd 到tensorflow文件夹下运行命令 ./configure
+ 1. linux环境下（ubuntu16）
+	1. 下载安装 bazel（下载安装最新版） VPN
+	1. 下载tensorflow（没有版本要求）
+	1. cd 到tensorflow文件夹下运行命令 ./configure
 			运行这条命令后会有一些选项，一些需要地址的输入软件地址（比如python地址），其余的一些配置一律选择no，
 			如果选择yes会因为一些相应的包没有安装导致报错，也根据自己的实际情况自行选择。一般全部选择no不会报错
-		4、运行 bazel build --config=opt //tensorflow:libtensorflow_cc.so
+	1. 运行 bazel build --config=opt //tensorflow:libtensorflow_cc.so
 
-	
-  
-二、 C++通过上面编译好的DLL调用tensorflow生成的.pb文件。
+	 
+1. C++通过上面编译好的DLL调用tensorflow生成的.pb文件。
 
 1、配置环境 
 包含目录：
@@ -357,6 +355,6 @@ int inference()
 https://medium.com/jim-fleming/loading-a-tensorflow-graph-with-the-c-api-4caaff88463f
 https://medium.com/@shiweili/building-tensorflow-c-shared-library-on-windows-e79c90e23e6e
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1ODgzNDE0MTksODA4NTI4OTMwLDEwMz
-g5NDMzMzZdfQ==
+eyJoaXN0b3J5IjpbMTc3NzM5MDk0MSw4MDg1Mjg5MzAsMTAzOD
+k0MzMzNl19
 -->
