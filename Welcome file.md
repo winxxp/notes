@@ -2,12 +2,12 @@
 =================
 
 1. window10环境下
-   1. 下载工具并安装 ：
+   1. 下载工具并安装 
 	   1.  [Cmake](https://cmake.org/download/)
 	   1.  [swig](http://www.swig.org/download.html)
 	   1.  [Anaconda3-5.2.0](https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/) 
-   1. 下载[tensorflow](https://github.com/tensorflow/tensorflow/tree/v1.6.0-rc0)（tensorflow建议直接下载链接给的这个版本，太新的版本会有错误）
-		3.1、打开vs2015 x64本机工具命令提示符，以管理员身份运行 （一定要以管理员身份运行，不然在最后一步会报错）
+   1. 下载代码[tensorflow v1.6.0-rc0](https://github.com/tensorflow/tensorflow/tree/v1.6.0-rc0)**（tensorflow建议直接下载链接给的这个版本，太新的版本会有错误）**
+   1. 打开vs2015 x64本机工具命令提示符，以管理员身份运行 （一定要以管理员身份运行，不然在最后一步会报错）
 		4.1、输入命令powershell
 		5.1、cd到刚刚下载的tensorflow文件夹tensorflow\contrib\cmake新建一个build文件夹
 		6.1、运行命令cmake .. -A x64 DCMAKE_BUILD_TYPE=Release DSWIG_EXECUTABLE=C:\swigwin-3.0.12\swig.exe DPYTHON_EXECUTABLE=C:\Anaconda3\envs\tensorflow\python.exe DPYTHON_LIBRARIES=C:\Anaconda3\envs\tensorflow\libs\python35.lib Dtensorflow_BUILD_PYTHON_BINDINGS=OFF Dtensorflow_ENABLE_GRPC_SUPPORT=OFF Dtensorflow_BUILD_SHARED_LIB=ON  
@@ -353,5 +353,5 @@ int inference()
 https://medium.com/jim-fleming/loading-a-tensorflow-graph-with-the-c-api-4caaff88463f
 https://medium.com/@shiweili/building-tensorflow-c-shared-library-on-windows-e79c90e23e6e
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg2MTU5MjgxMV19
+eyJoaXN0b3J5IjpbLTEyMDQwMzQ1MTBdfQ==
 -->
