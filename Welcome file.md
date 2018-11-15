@@ -7,11 +7,10 @@
 1. 下载代码
    1. [tensorflow v1.6.0-rc0](https://github.com/tensorflow/tensorflow/tree/v1.6.0-rc0)**（tensorflow建议直接下载链接给的这个版本，太新的版本会有错误）**
  1. 编译
-    1.  打开vs2015 x64本机工具命令提示符，以管理员身份运行 （一定要以管理员身份运行，不然在最后一步会报错）
-		4.1、输入命令powershell
-		5.1、cd到刚刚下载的tensorflow文件夹tensorflow\contrib\cmake新建一个build文件夹
-		6.1、运行命令cmake .. -A x64 DCMAKE_BUILD_TYPE=Release DSWIG_EXECUTABLE=C:\swigwin-3.0.12\swig.exe DPYTHON_EXECUTABLE=C:\Anaconda3\envs\tensorflow\python.exe DPYTHON_LIBRARIES=C:\Anaconda3\envs\tensorflow\libs\python35.lib Dtensorflow_BUILD_PYTHON_BINDINGS=OFF Dtensorflow_ENABLE_GRPC_SUPPORT=OFF Dtensorflow_BUILD_SHARED_LIB=ON  
-		-A x64 DCMAKE_BUILD_TYPE=Release （命令中的三个路径根据自己第一步安装的路径进行相应的修改）
+	1.  打开vs2015 x64本机工具命令提示符，以管理员身份运行 （一定要以管理员身份运行，不然在最后一步会报错）
+	2. `cd tensorflow\contrib\cmake`
+	3. `mkdir _build`
+	4. `cmake -A x64 -DCMAKE_BUILD_TYPE=Release -DSWIG_EXECUTABLE=%SWIG_EXECUTABLE% -DPYTHON_EXECUTABLE=%PYTHON_EXECUTABLE% -DPYTHON_LIBRARIES=%PYTHON_LIBRARIES%  -Dtensorflow_BUILD_PYTHON_BINDINGS=OFF -Dtensorflow_ENABLE_GRPC_SUPPORT=OFF -Dtensorflow_BUILD_SHARED_LIB=ON -DCMAKE_BUILD_TYPE=Release ..` （命令中的三个路径根据自己第一步安装的路径进行相应的修改）
 		7.1、运行命令 `MSbuild m:1 p:CL_MPCount=1 p:Configuration=Release  p:Platform=x64 p:PreferredToolArchitecture=x64 ALL_BUILD.vcxproj filelogger`
 		   （运行这一步时一定要有稳定的VPN，因为要到google下载一些库，否则会编译不成功）
 		8.1、运行命令 MSbuild m:1 p:CL_MPCount=1 p:Configuration=Release  p:Platform=x64 p:PreferredToolArchitecture=x64 INSTALL.vcxproj filelogger
@@ -188,7 +187,7 @@ https://medium.com/@shiweili/building-tensorflow-c-shared-library-on-windows-e79
 		6.1、运行命令cmake .. -A x64 DCMAKE_BUILD_TYPE=Release DSWIG_EXECUTABLE=C:\swigwin-3.0.12\swig.exe DPYTHON_EXECUTABLE=C:\Anaconda3\envs\tensorflow\python.exe DPYTHON_LIBRARIES=C:\Anaconda3\envs\tensorflow\libs\python35.lib Dtensorflow_BUILD_PYTHON_BINDINGS=OFF Dtensorflow_ENABLE_GRPC_SUPPORT=OFF Dtensorflow_BUILD_SHARED_LIB=ON  
 		-A x64 DCMAKE_BUILD_TYPE=Release （命令中的三个路径根据自己第一步安装的路径进行相应的修改）
 		7.1、编译` MSBuild /m:1 /p:CL_MPCount=1 /p:Configuration=Release /p:Platform=x64 /p:PreferredToolArchitecture=x64 ALL_BUILD.vcxproj  /filelogger`（运行这一步时一定要有稳定的VPN，因为要到google下载一些库，否则会编译不成功）
-		8.1、安装`MSbuild /m:1 /p:CL_MPCount=1 /p:Configuration=Release /p:Platform=x64 /p:PreferredToolArchitecture=x64 INSTALL.vcxproj /filelogger`		   （运行完这一步后就会在c:/program下生成一个tensorflow文件夹。）
+		8.1、安装`MSbuild /m:1 /p:CL_MPCount=1 /p:Configuration=Release /p:Platform=x64 /p:PreferredToolArchitecture=x64 INSTALL.vcxproj /filelogger`（运行完这一步后就会在c:/program下生成一个tensorflow文件夹。）
 	
 	2、linux环境下（ubuntu16）
 		1、下载安装 bazel（下载安装最新版） VPN
@@ -351,6 +350,6 @@ int inference()
 https://medium.com/jim-fleming/loading-a-tensorflow-graph-with-the-c-api-4caaff88463f
 https://medium.com/@shiweili/building-tensorflow-c-shared-library-on-windows-e79c90e23e6e
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYyNDE4MzExMyw4MDg1Mjg5MzAsMTAzOD
-k0MzMzNl19
+eyJoaXN0b3J5IjpbLTEwODU5MjE2NjYsODA4NTI4OTMwLDEwMz
+g5NDMzMzZdfQ==
 -->
