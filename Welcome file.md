@@ -10,7 +10,12 @@
 	1.  打开vs2015 x64本机工具命令提示符，以管理员身份运行 （一定要以管理员身份运行，不然在最后一步会报错）
 	2. `cd tensorflow\contrib\cmake`
 	3. `mkdir _build`
-	4. `cmake -A x64 -DCMAKE_BUILD_TYPE=Release -DSWIG_EXECUTABLE=%SWIG_EXECUTABLE% -DPYTHON_EXECUTABLE=%PYTHON_EXECUTABLE% -DPYTHON_LIBRARIES=%PYTHON_LIBRARIES%  -Dtensorflow_BUILD_PYTHON_BINDINGS=OFF -Dtensorflow_ENABLE_GRPC_SUPPORT=OFF -Dtensorflow_BUILD_SHARED_LIB=ON -DCMAKE_BUILD_TYPE=Release ..` （命令中的三个路径根据自己第一步安装的路径进行相应的修改）
+	4.     
+	```set SWIG_EXECUTABLE=E:\workspace\103-Whistle\software\swigwin-3.0.12\swig.exe 
+    set PYTHON_EXECUTABLE=d:\Anaconda3\envs\tensorflow\python.exe 
+    set PYTHON_LIBRARIES=C:\Anaconda3\envs\tensorflow\libs\python36.lib
+    ```
+	6. `cmake -A x64 -DCMAKE_BUILD_TYPE=Release -DSWIG_EXECUTABLE=%SWIG_EXECUTABLE% -DPYTHON_EXECUTABLE=%PYTHON_EXECUTABLE% -DPYTHON_LIBRARIES=%PYTHON_LIBRARIES%  -Dtensorflow_BUILD_PYTHON_BINDINGS=OFF -Dtensorflow_ENABLE_GRPC_SUPPORT=OFF -Dtensorflow_BUILD_SHARED_LIB=ON -DCMAKE_BUILD_TYPE=Release ..` （命令中的三个路径根据自己第一步安装的路径进行相应的修改）
 		7.1、运行命令 `MSbuild m:1 p:CL_MPCount=1 p:Configuration=Release  p:Platform=x64 p:PreferredToolArchitecture=x64 ALL_BUILD.vcxproj filelogger`
 		   （运行这一步时一定要有稳定的VPN，因为要到google下载一些库，否则会编译不成功）
 		8.1、运行命令 MSbuild m:1 p:CL_MPCount=1 p:Configuration=Release  p:Platform=x64 p:PreferredToolArchitecture=x64 INSTALL.vcxproj filelogger
@@ -350,6 +355,6 @@ int inference()
 https://medium.com/jim-fleming/loading-a-tensorflow-graph-with-the-c-api-4caaff88463f
 https://medium.com/@shiweili/building-tensorflow-c-shared-library-on-windows-e79c90e23e6e
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwODU5MjE2NjYsODA4NTI4OTMwLDEwMz
-g5NDMzMzZdfQ==
+eyJoaXN0b3J5IjpbNDM0OTQwNzksODA4NTI4OTMwLDEwMzg5ND
+MzMzZdfQ==
 -->
