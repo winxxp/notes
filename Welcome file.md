@@ -10,8 +10,9 @@
 	1.  打开vs2015 x64本机工具命令提示符，以管理员身份运行 （一定要以管理员身份运行，不然在最后一步会报错）
 	2. `cd tensorflow\contrib\cmake`
 	3. `mkdir _build`
-	4.     
-	```set SWIG_EXECUTABLE=E:\workspace\103-Whistle\software\swigwin-3.0.12\swig.exe 
+	4.  
+	5. ```
+	set SWIG_EXECUTABLE=E:\workspace\103-Whistle\software\swigwin-3.0.12\swig.exe 
     set PYTHON_EXECUTABLE=d:\Anaconda3\envs\tensorflow\python.exe 
     set PYTHON_LIBRARIES=C:\Anaconda3\envs\tensorflow\libs\python36.lib
     ```
@@ -355,6 +356,6 @@ int inference()
 https://medium.com/jim-fleming/loading-a-tensorflow-graph-with-the-c-api-4caaff88463f
 https://medium.com/@shiweili/building-tensorflow-c-shared-library-on-windows-e79c90e23e6e
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDM0OTQwNzksODA4NTI4OTMwLDEwMzg5ND
-MzMzZdfQ==
+eyJoaXN0b3J5IjpbMjAyMTA1MTczNCw4MDg1Mjg5MzAsMTAzOD
+k0MzMzNl19
 -->
