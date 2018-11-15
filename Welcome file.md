@@ -31,105 +31,106 @@
 	1. 运行 bazel build --config=opt //tensorflow:libtensorflow_cc.so
 
 	 
-1. C++通过上面编译好的DLL调用tensorflow生成的.pb文件。
+### C++通过上面编译好的DLL调用tensorflow生成的.pb文件。
+   1.  配置环境 
+		```
+		包含目录：
+			C:\Program Files\tensorflow\include\tensorflow
+			C:\Program Files\tensorflow\include
+			C:\Program Files\tensorflow\include\tensorflow\core\protobuf
+			C:\Program Files\tensorflow\include\external\nsync\public
+			C:\Program Files\tensorflow\include\external\eigen_archive
+		库目录：
+			C:\Program Files\tensorflow\lib
+		```
 
-1、配置环境 
-包含目录：
-	C:\Program Files\tensorflow\include\tensorflow
-	C:\Program Files\tensorflow\include
-	C:\Program Files\tensorflow\include\tensorflow\core\protobuf
-	C:\Program Files\tensorflow\include\external\nsync\public
-	C:\Program Files\tensorflow\include\external\eigen_archive
-库目录：
-	C:\Program Files\tensorflow\lib
+   1. 程序源码
+		```
+		#include "stdafx.h"
 
-2、程序源码
+		#include "tensorflow/core/public/session.h"
+		#include "tensorflow/core/platform/env.h"
+		#include "tensorflow/core/framework/tensor.h"
+		#include "tensorflow/cc/ops/standard_ops.h"
+		#include "tensorflow/cc/client/client_session.h"
 
-#include "stdafx.h"
+		#include "stdlib.h"
 
-#include "tensorflow/core/public/session.h"
-#include "tensorflow/core/platform/env.h"
-#include "tensorflow/core/framework/tensor.h"
-#include "tensorflow/cc/ops/standard_ops.h"
-#include "tensorflow/cc/client/client_session.h"
+		using namespace tensorflow;
 
-#include "stdlib.h"
+		int main() {
 
-using namespace tensorflow;
+			
+			std::vector<float> vec= {};
 
-int main() {
+			//新建session
+			Session* session;
+			Status status = NewSession(SessionOptions(), &session);
+			if (!status.ok()) {
+				std::cout << status.ToString() << "\n";
+				return 1;
+			}
 
-	
-	std::vector<float> vec= {};
+			//读取创建的pb文件中的graph
+			GraphDef graph_def;
+			status = ReadBinaryProto(Env::Default(), "model1_pb", &graph_def);
+			if (!status.ok()) {
+				std::cout << status.ToString() << "\n";
+				return 1;
+			}
 
-	//新建session
-	Session* session;
-	Status status = NewSession(SessionOptions(), &session);
-	if (!status.ok()) {
-		std::cout << status.ToString() << "\n";
-		return 1;
-	}
+			//将读取的graph添加到session中
+			status = session->Create(graph_def);
+			if (!status.ok()) {
+				std::cout << status.ToString() << "\n";
+				return 1;
+			}
 
-	//读取创建的pb文件中的graph
-	GraphDef graph_def;
-	status = ReadBinaryProto(Env::Default(), "model1_pb", &graph_def);
-	if (!status.ok()) {
-		std::cout << status.ToString() << "\n";
-		return 1;
-	}
+			//设置输入输出
+			Tensor x_t(DT_FLOAT, TensorShape({1,1066}));
+			int ndim = vec.size();
+			Tensor X(DT_FLOAT, TensorShape({ 1,ndim }));
+			auto x_map = X.tensor<float, 2>();
+			for (int j = 0; j < ndim; j++) {
+				x_map(0, j) = vec[j];
+			}
 
-	//将读取的graph添加到session中
-	status = session->Create(graph_def);
-	if (!status.ok()) {
-		std::cout << status.ToString() << "\n";
-		return 1;
-	}
+			Tensor keep_prob(DT_FLOAT, TensorShape());
+			keep_prob.scalar<float>()() = 1.0;
 
-	//设置输入输出
-	Tensor x_t(DT_FLOAT, TensorShape({1,1066}));
-	int ndim = vec.size();
-	Tensor X(DT_FLOAT, TensorShape({ 1,ndim }));
-	auto x_map = X.tensor<float, 2>();
-	for (int j = 0; j < ndim; j++) {
-		x_map(0, j) = vec[j];
-	}
+			Tensor batch_norm(DT_BOOL, TensorShape());
+			batch_norm.scalar<bool>()() = false;
 
-	Tensor keep_prob(DT_FLOAT, TensorShape());
-	keep_prob.scalar<float>()() = 1.0;
+			std::vector<std::string>labels;
+			labels.emplace_back("output/label");
+			std::vector<Tensor>label;
 
-	Tensor batch_norm(DT_BOOL, TensorShape());
-	batch_norm.scalar<bool>()() = false;
+			std::vector<std::pair<string, Tensor>>inputs = { {"input",X },
+			{"keep_prob",keep_prob },{ "batch_norm",batch_norm } };
 
-	std::vector<std::string>labels;
-	labels.emplace_back("output/label");
-	std::vector<Tensor>label;
+			//Run the session ， evaluation operation from the graph
+			status = session->Run(inputs, labels, {}, &label);
+			if (!status.ok()) {
+				std::cout << status.ToString() << "\n";
+				return 1;
+			}
 
-	std::vector<std::pair<string, Tensor>>inputs = { {"input",X },
-	{"keep_prob",keep_prob },{ "batch_norm",batch_norm } };
+			打印结果
+			auto output_c = label[0].scalar<int>();
+			std::cout << label[0].DebugString() << "\n";
+			std::cout << output_c() << "\n";
 
-	//Run the session ， evaluation operation from the graph
-	status = session->Run(inputs, labels, {}, &label);
-	if (!status.ok()) {
-		std::cout << status.ToString() << "\n";
-		return 1;
-	}
+			//关闭会话
+			session->Close();
+			return 0;
 
-	打印结果
-	auto output_c = label[0].scalar<int>();
-	std::cout << label[0].DebugString() << "\n";
-	std::cout << output_c() << "\n";
-
-	//关闭会话
-	session->Close();
-	return 0;
-
-	// 如果程序编译没有出错，运行时出错。一般是输入数据的名字与模型placehold不一样导致的，输出名字一定要和模型输出数据结点一致，
-	// 还有一种情况是输入数据的维度和pb文件定义的输入维度不一致。
-}
+			// 如果程序编译没有出错，运行时出错。一般是输入数据的名字与模型placehold不一样导致的，输出名字一定要和模型输出数据结点一致，
+			// 还有一种情况是输入数据的维度和pb文件定义的输入维度不一致。
+		}
+		```
 
 
-
-三、编译好的动态库使用
+###  编译好的动态库使用
 1、初始化
 	1.1、函数原型
 		int *WhistleIdentificationInit(char *szPbFile)
@@ -355,6 +356,6 @@ int inference()
 https://medium.com/jim-fleming/loading-a-tensorflow-graph-with-the-c-api-4caaff88463f
 https://medium.com/@shiweili/building-tensorflow-c-shared-library-on-windows-e79c90e23e6e
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc3NzM5MDk0MSw4MDg1Mjg5MzAsMTAzOD
-k0MzMzNl19
+eyJoaXN0b3J5IjpbLTE1NDI2OTU4NTksODA4NTI4OTMwLDEwMz
+g5NDMzMzZdfQ==
 -->
