@@ -2,10 +2,11 @@
 =================
 
 1. window10环境下
-   1. 下载安装 ：[Cmake](https://cmake.org/download/)
-					  [swig](http://www.swig.org/download.html)
-					  [Anaconda3-5.2.0]https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/）			  
-		2.1、下载tensorflow （https://github.com/tensorflow/tensorflow/tree/v1.6.0-rc0）（tensorflow建议直接下载链接给的这个版本，太新的版本会有错误）
+   1. 下载工具并安装 ：
+	   1.  [Cmake](https://cmake.org/download/)
+	   1.  [swig](http://www.swig.org/download.html)
+	   1.  [Anaconda3-5.2.0](https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/) 
+   1. 下载[tensorflow](https://github.com/tensorflow/tensorflow/tree/v1.6.0-rc0)（tensorflow建议直接下载链接给的这个版本，太新的版本会有错误）
 		3.1、打开vs2015 x64本机工具命令提示符，以管理员身份运行 （一定要以管理员身份运行，不然在最后一步会报错）
 		4.1、输入命令powershell
 		5.1、cd到刚刚下载的tensorflow文件夹tensorflow\contrib\cmake新建一个build文件夹
@@ -352,5 +353,5 @@ int inference()
 https://medium.com/jim-fleming/loading-a-tensorflow-graph-with-the-c-api-4caaff88463f
 https://medium.com/@shiweili/building-tensorflow-c-shared-library-on-windows-e79c90e23e6e
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg5OTg0MDYzM119
+eyJoaXN0b3J5IjpbLTg2MTU5MjgxMV19
 -->
