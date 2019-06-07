@@ -49,24 +49,19 @@
    E:\033-daspembed\code\grpcte\third_party\grpc\include
 5. 加lib
    ```text
-  ws2_32.lib
-  libprotoc.lib
-  libprotobuf.lib
-  grpc.lib
-  gpr.lib
-  grpc++.lib
-  zlibstatic.lib
-  ssl.lib
-  crypto.lib
+   ws2_32.lib
+   libprotoc.lib
+   libprotobuf.lib
+   grpc.lib
+   gpr.lib
+   grpc++.lib
+   zlibstatic.lib
+   ssl.lib
+   crypto.lib
 6. 增加lib搜索目录
     ```text
     E:\033-daspembed\code\grpcte\third_party\protobuf\lib
-  E:\033-daspembed\code\grpcte\third_party\grpc\Debug
-  E:\033-daspembed\code\grpcte\third_party\grpc.dependencies.zlib.1.2.8.10\build\native\lib\v140\Win32\Debug\static\cdecl
-  E:\033-daspembed\code\grpcte\third_party\grpc.dependencies.openssl.1.0.204.1\build\native\lib\v140\Win32\Debug\static
-  E:\033-daspembed\code\grpcte\third_party\gflags.2.1.2.1\build\native\Win32\v120\static\Lib
-
-
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1MDY3MTU4MzVdfQ==
--->
+    E:\033-daspembed\code\grpcte\third_party\grpc\Debug
+    E:\033-daspembed\code\grpcte\third_party\grpc.dependencies.zlib.1.2.8.10\build\native\lib\v140\Win32\Debug\static\cdecl
+   E:\033-daspembed\code\grpcte\third_party\grpc.dependencies.openssl.1.0.204.1\build\native\lib\v140\Win32\Debug\static
+   E:\033-daspembed\code\grpcte\third_party\gflags.2.1.2.1\build\native\Win32\v120\static\Lib
